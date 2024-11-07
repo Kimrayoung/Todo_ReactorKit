@@ -25,6 +25,9 @@ class ViewController: UIViewController {
 
 extension ViewController: StoryboardView {
     func bind(reactor: TodoReactor) {
+        // viewDidLoad가 되자마자 Action을 트리거
+        // onNext메서드를 사용하여 Action을 Reactor에게 전달한다.
+        // 기존의 tap.map.bind -> 이것과 비슷하다
         reactor.action.onNext(.fetchTodos)
         
         reactor.state.map { $0.todos }
