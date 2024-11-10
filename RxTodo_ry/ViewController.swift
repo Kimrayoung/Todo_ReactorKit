@@ -28,7 +28,10 @@ extension ViewController: StoryboardView {
         // viewDidLoad가 되자마자 Action을 트리거
         // onNext메서드를 사용하여 Action을 Reactor에게 전달한다.
         // 기존의 tap.map.bind -> 이것과 비슷하다
-        reactor.action.onNext(.fetchTodos)
+        // 기존의 Tap이라는 액션이 들어오면 해당 액션에 트리거되어서 map{reactor.Action.increase}를 통해서 Tap을 Action Type으로 변환하고 .bind(to: reactor.action)을 통해서 reactor.action에 연결 시켜준 것과 같이
+        // 즉, 사용자의 tap액션을 Reactor에게 전달하는 것
+        //reactor.action.onNext(.enterView)도 위의 원리와 비슷하게 fetchTodos라는 액션을 전달해준 것이다.
+        reactor.action.onNext(.enterView)
         
         reactor.state.map { $0.todos }
             .bind(to: todoList.rx.items(cellIdentifier: "TodoCell", cellType: TodoCell.self)) {
@@ -39,19 +42,4 @@ extension ViewController: StoryboardView {
     }
 }
 
-//extension ViewController: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 1
-//    }
-//    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let todoCell = todoList.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath) as? TodoCell else { return UITableViewCell() }
-//        
-//        todoCell.setupData(Todo(id: "", title: "", description: "", createdAt: "", isCompleted: false))
-//        
-//        return todoCell
-//    }
-//    
-//    
-//}
 

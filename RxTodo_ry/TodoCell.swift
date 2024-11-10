@@ -22,6 +22,11 @@ class TodoCell: UITableViewCell {
         return label
     }()
     
+    private var isCompleteToggle: UISwitch = {
+        let toggle = UISwitch()
+        return toggle
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -35,10 +40,11 @@ class TodoCell: UITableViewCell {
     func setupData(_ todoData: Todo) {
         titleLabel.text = todoData.title
         createdAtLabel.text = todoData.createdAt.stringToDate.dateToString
+        isCompleteToggle.isOn = todoData.isCompleted
     }
     
     private func setupLayout() {
-        contentView.addSubViews(titleLabel, createdAtLabel)
+        contentView.addSubViews(titleLabel, createdAtLabel, isCompleteToggle)
         
         createdAtLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(10)
@@ -48,6 +54,11 @@ class TodoCell: UITableViewCell {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(createdAtLabel.snp.bottom).offset(10)
             make.left.equalTo(createdAtLabel.snp.left)
+        }
+        
+        isCompleteToggle.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-10)
+            make.centerY.equalToSuperview()
         }
     }
     
