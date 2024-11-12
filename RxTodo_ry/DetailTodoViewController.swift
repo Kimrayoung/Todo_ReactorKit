@@ -38,7 +38,6 @@ class DetailTodoViewController: UIViewController, StoryboardView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let navigationTrailingBtn = UIBarButtonItem(customView: saveBtn)
         self.navigationItem.rightBarButtonItem = navigationTrailingBtn
         descriptionTextField.layer.borderWidth = 1.0

@@ -98,6 +98,7 @@ extension TodoReactor {
             newState.todos = todos
         case let .addTodo(todoComplete, todo):
             if todoComplete {
+                print(#fileID, #function, #line, "- data 추가성공⭐️")
                 newState.todos.append(todo)
                 newState.addTodoComplete = todoComplete
             }

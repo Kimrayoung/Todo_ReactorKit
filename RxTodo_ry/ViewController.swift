@@ -29,7 +29,6 @@ class ViewController: UIViewController {
         todoDetailController.reactor = self.reactor
         todoDetailController.navigationItem.title = "할 일 추가"
         self.navigationController?.pushViewController(todoDetailController, animated: false)
-        
     }
 }
 
@@ -38,6 +37,7 @@ extension ViewController: StoryboardView {
         reactor.action.onNext(.enterView)
         
         reactor.state.map { $0.todos }
+            .debug("todos 불러옴❌")
             .bind(to: todoList.rx.items(cellIdentifier: "TodoCell", cellType: TodoCell.self)) {
                 _, todo, cell in
                 cell.setupData(todo)
