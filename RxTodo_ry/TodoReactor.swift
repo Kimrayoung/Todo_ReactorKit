@@ -8,9 +8,20 @@
 import Foundation
 import ReactorKit
 import RxSwift
+import RxCocoa
 import FirebaseFirestore
 
+//전역적으로 접근 가능한 공유 클래스
+class TodoDataStore {
+    // 전역으로 공유할 수 있도록 메모리 생성
+    static let shared = TodoDataStore()
+    // 전역으로 공유할 메모리
+    let todoList = BehaviorRelay<[Todo]>(value: [])
+}
+
 final class TodoReactor: Reactor {
+    // 전역으로 공유할 데이터가 있는 클래스의 인스턴스를 가지고온다
+    let todoStore = TodoDataStore.shared
     enum Action {
         case enterView
         case addTodo(Todo)
@@ -63,6 +74,8 @@ extension TodoReactor {
                                 observer.onError(error)
                             }
                         }
+                        //store업데이트
+                        self.todoStore.todoList.accept(todos)
                         // 데이터를 모두 가져왔을 때 Mutation을 방출함
                         observer.onNext(Mutation.fetchTodos(todos))
                         observer.onCompleted()
@@ -81,6 +94,9 @@ extension TodoReactor {
                 } catch let error {
                     observer.onError(error)
                 }
+                var currentTodos = self.todoStore.todoList.value
+                currentTodos.append(todo)
+                self.todoStore.todoList.accept(currentTodos)
                 observer.onNext(Mutation.addTodo(true, todo))
                 observer.onCompleted()
                 return Disposables.create()
@@ -88,22 +104,35 @@ extension TodoReactor {
         case .addTodoSample:
             return Observable.just(Mutation.addTodoSample(true))
         }
-        
+    }
+    
+    
+    //transform을 이용해서 외부에서 들어오는 State를 받아서 넘겨준다
+    func transform(state: Observable<State>) -> Observable<State> {
+        return Observable.combineLatest(state, todoStore.todoList) { state, todos in
+            var newState = state
+            newState.todos = todos
+            return newState
+        }
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
         var newState: State = state
         switch mutation {
         case .fetchTodos(let todos):
-            newState.todos = todos
+            // todos를 transform에서 업데이트 해주므로 여기서 업데이트 해줄 필요가 없음
+            //newState.todos = todos
+            
+            break
         case let .addTodo(todoComplete, todo):
             if todoComplete {
                 print(#fileID, #function, #line, "- data 추가성공⭐️")
-                newState.todos.append(todo)
+                // todos배열의 업데이트는 transform에서 진행된다
+//                newState.todos.append(todo)
                 newState.addTodoComplete = todoComplete
             }
         case .addTodoSample(let check):
-            print(#fileID, #function, #line, "- todo 들어옴")
+            print(#fileID, #function, #line, "- todo 들어옴: \(check)")
         }
         
         return newState

@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     
     @objc private func addTodoTapped() {
         guard let todoDetailController = DetailTodoViewController.getInstance() else { return }
-        todoDetailController.reactor = self.reactor
+//        todoDetailController.reactor = self.reactor
         todoDetailController.navigationItem.title = "할 일 추가"
         self.navigationController?.pushViewController(todoDetailController, animated: false)
     }

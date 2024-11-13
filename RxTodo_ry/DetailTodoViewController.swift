@@ -18,7 +18,7 @@ class DetailTodoViewController: UIViewController, StoryboardView {
     @IBOutlet weak var dueDate: UIDatePicker!
     @IBOutlet weak var isCompleteToggle: UISwitch!
     
-    var todoReactor: TodoReactor?
+//    var todoReactor: TodoReactor?
     
     let saveBtn: UIButton = {
         let btn = UIButton()
@@ -38,6 +38,7 @@ class DetailTodoViewController: UIViewController, StoryboardView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.reactor = TodoReactor()
         let navigationTrailingBtn = UIBarButtonItem(customView: saveBtn)
         self.navigationItem.rightBarButtonItem = navigationTrailingBtn
         descriptionTextField.layer.borderWidth = 1.0
