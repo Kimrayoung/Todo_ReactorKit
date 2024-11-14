@@ -71,6 +71,8 @@ extension TodoReactor {
                 return Disposables.create()
             } // .enterView
         case .todoSelected(let idx):
+            // clear를 통해서 State의 selectTodo를 nil로 업데이트 해주지 않으면 viewController의 bind의 reactor.state.map { $0.selectTodo }가 계속 실행된다 -> 선택 상태를 해제하는 작업
+            // 이유: ViewController에 돌아올때마다 State의 selectTodo에 값이 있어서 계속 트리거 되기 때문이다
             return .concat([
                 .just(.todoSelected(idx)),
                 .just(.clearSelectedTodo)
