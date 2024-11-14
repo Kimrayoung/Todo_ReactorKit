@@ -34,14 +34,30 @@ class ViewController: UIViewController {
         guard let todoDetailController = DetailTodoViewController.getInstance() else { return }
 //        todoDetailController.reactor = self.reactor
         todoDetailController.navigationItem.title = "할 일 추가"
+        todoDetailController.vcType = .add
         self.navigationController?.pushViewController(todoDetailController, animated: false)
     }
 }
 
 extension ViewController: StoryboardView {
     func bind(reactor: TodoReactor) {
-        // 여기서는 enterView 액션 제거 (viewWillAppear에서 처리하므로)
-//        reactor.action.onNext(.enterView)
+        todoList.rx.itemSelected
+            .map { TodoReactor.Action.todoSelected($0.row) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        reactor.state.map { $0.selectTodo }
+            .debug("????")
+            .filter { $0 != nil }
+            .subscribe { [weak self] todo in
+                guard let self = self else { return }
+                guard let todoDetailController = DetailTodoViewController.getInstance() else { return }
+                todoDetailController.navigationItem.title = "할 일 수정"
+                todoDetailController.todoData = todo
+                todoDetailController.vcType = .edit
+                self.navigationController?.pushViewController(todoDetailController, animated: false)
+            }
+            .disposed(by: disposeBag)
         
         reactor.state.map { $0.todos }
             .bind(to: todoList.rx.items(cellIdentifier: "TodoCell", cellType: TodoCell.self)) {

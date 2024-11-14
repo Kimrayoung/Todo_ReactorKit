@@ -13,14 +13,18 @@ import FirebaseFirestore
 final class TodoReactor: Reactor {
     enum Action {
         case enterView
+        case todoSelected(Int)
     }
     
     enum Mutation {
         case fetchTodos([Todo])
+        case todoSelected(Int)
+        case clearSelectedTodo
     }
     
     struct State {
         var todos: [Todo]
+        var selectTodo: Todo?
     }
 
     var initialState: State
@@ -43,7 +47,7 @@ extension TodoReactor {
                     if let error = error {
                         observer.onError(error)
                     } else {
-                        var todos: [Todo] = [Todo(id: "1", title: "dfdf", description: "", createdAt: "", isCompleted: false)]
+                        var todos: [Todo] = []
                         guard let query = query else {
                             observer.onCompleted()
                             return
@@ -66,6 +70,11 @@ extension TodoReactor {
                 //비동기 작업이나 리소스 정리가 필요할 때 옵저버블 해제 시 필요한 작업을 수행하기 위해서 사용한다.
                 return Disposables.create()
             } // .enterView
+        case .todoSelected(let idx):
+            return .concat([
+                .just(.todoSelected(idx)),
+                .just(.clearSelectedTodo)
+            ])
             
         }
     }
@@ -77,8 +86,14 @@ extension TodoReactor {
             print(#fileID, #function, #line, "- todos 가져옴⭐️")
             newState.todos = todos
             
-            return newState
+        case let .todoSelected(idx):
+            newState.selectTodo = newState.todos[idx]
+            
+        case .clearSelectedTodo:
+            newState.selectTodo = nil
         }
+        
+        return newState
     }
         
 }
