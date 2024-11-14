@@ -18,7 +18,7 @@ class DetailTodoViewController: UIViewController, StoryboardView {
     @IBOutlet weak var dueDate: UIDatePicker!
     @IBOutlet weak var isCompleteToggle: UISwitch!
     
-    var todoReactor: TodoReactor?
+//    var todoReactor: TodoReactor?
     
     let saveBtn: UIButton = {
         let btn = UIButton()
@@ -38,7 +38,7 @@ class DetailTodoViewController: UIViewController, StoryboardView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.reactor = DetailTodoReactor()
         let navigationTrailingBtn = UIBarButtonItem(customView: saveBtn)
         self.navigationItem.rightBarButtonItem = navigationTrailingBtn
         descriptionTextField.layer.borderWidth = 1.0
@@ -49,7 +49,7 @@ class DetailTodoViewController: UIViewController, StoryboardView {
 
 
 extension DetailTodoViewController {
-    func bind(reactor: TodoReactor) {
+    func bind(reactor: DetailTodoReactor) {
         /*
         self.saveBtn.rx.tap
             .debug("check saveBtn Tap")
@@ -70,7 +70,7 @@ extension DetailTodoViewController {
         // 저장버튼 누를 경우
         self.saveBtn.rx.tap
             .withLatestFrom(todoTitleTextField.rx.text.orEmpty)
-            .flatMap { text -> Observable<TodoReactor.Action> in
+            .flatMap { text -> Observable<DetailTodoReactor.Action> in
                 // title에 값이 들어가 있으면 Observable을 출력출력하고 아니라면 alert출력
                 if text.isEmpty {
                     print(#fileID, #function, #line, "- Text비었음")
