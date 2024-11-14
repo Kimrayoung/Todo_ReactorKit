@@ -13,24 +13,19 @@ import FirebaseFirestore
 final class TodoReactor: Reactor {
     enum Action {
         case enterView
-        case addTodo(Todo)
-        case addTodoSample
     }
     
     enum Mutation {
         case fetchTodos([Todo])
-        case addTodo(Bool, Todo)
-        case addTodoSample(Bool)
     }
     
     struct State {
         var todos: [Todo]
-        var addTodoComplete: Bool?
     }
 
     var initialState: State
     
-    init(initialState: State = State(todos: [], addTodoComplete: nil)) {
+    init(initialState: State = State(todos: [])) {
         self.initialState = initialState
     }
 }
@@ -71,41 +66,19 @@ extension TodoReactor {
                 //비동기 작업이나 리소스 정리가 필요할 때 옵저버블 해제 시 필요한 작업을 수행하기 위해서 사용한다.
                 return Disposables.create()
             } // .enterView
-        case .addTodo(let todo):
-            return Observable.create { observer in
-                let db = Firestore.firestore()
-                do {
-                    try db.collection("todos").document(todo.id).setData(from: todo) { error in
-                        if let error = error { observer.onError(error) }
-                    }
-                } catch let error {
-                    observer.onError(error)
-                }
-                observer.onNext(Mutation.addTodo(true, todo))
-                observer.onCompleted()
-                return Disposables.create()
-            }
-        case .addTodoSample:
-            return Observable.just(Mutation.addTodoSample(true))
+            
         }
-        
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
         var newState: State = state
         switch mutation {
         case .fetchTodos(let todos):
+            print(#fileID, #function, #line, "- todos 가져옴⭐️")
             newState.todos = todos
-        case let .addTodo(todoComplete, todo):
-            if todoComplete {
-                print(#fileID, #function, #line, "- data 추가성공⭐️")
-                newState.todos.append(todo)
-                newState.addTodoComplete = todoComplete
-            }
-        case .addTodoSample(let check):
-            print(#fileID, #function, #line, "- todo 들어옴")
+            
+            return newState
         }
-        
-        return newState
     }
+        
 }
