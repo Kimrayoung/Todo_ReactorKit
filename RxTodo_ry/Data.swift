@@ -16,3 +16,8 @@ struct Todo: Codable, Identifiable {
     var editedAt: String?
     var isCompleted: Bool
 }
+
+enum DetailTodoType {
+    case add
+    case edit
+}
