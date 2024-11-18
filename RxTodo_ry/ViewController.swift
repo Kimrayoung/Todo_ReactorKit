@@ -9,10 +9,13 @@ import UIKit
 import ReactorKit
 import RxSwift
 import RxCocoa
+import SnapKit
 
 class ViewController: UIViewController {
     var disposeBag: DisposeBag = DisposeBag()
     @IBOutlet weak var todoList: UITableView!
+    
+//    private static var loadingView = LoadingV
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,9 +42,9 @@ class ViewController: UIViewController {
     }
 }
 
+
 extension ViewController: StoryboardView {
     func bind(reactor: TodoReactor) {
-        
         todoList.rx.itemSelected
             .withLatestFrom(reactor.state) { indexPath, state in
                 (indexPath.row, state.todos[indexPath.row])
@@ -61,6 +64,13 @@ extension ViewController: StoryboardView {
                 _, todo, cell in
                 cell.setupData(todo)
             }
+            .disposed(by: disposeBag)
+        
+        reactor.state.compactMap { $0.isLoading } // nil일때는 부르지 않도록 compactMap사용
+            .subscribe(onNext: {
+                if $0 { self.showLoadingView() } //true일때는 show
+                else { self.hideLoadingView() } //false일때는 hide
+            })
             .disposed(by: disposeBag)
     }
 }

@@ -37,6 +37,8 @@
 		4D58EF222CDBB7B400281949 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4D58EF212CDBB7B400281949 /* FirebaseFirestore */; };
 		4D58EF242CDBB7B400281949 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 4D58EF232CDBB7B400281949 /* FirebaseFirestoreCombine-Community */; };
 		4D58EF262CDBB7B400281949 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 4D58EF252CDBB7B400281949 /* FirebaseFunctions */; };
+		4D7D49322CEB3A1600925244 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7D49312CEB3A1600925244 /* LoadingView.swift */; };
+		4D7D49342CEB5EB000925244 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7D49332CEB5EB000925244 /* UIViewController+Ext.swift */; };
 		4DA616942CDCE598004EE9F8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DA616932CDCE597004EE9F8 /* GoogleService-Info.plist */; };
 		4DA616962CDCF40A004EE9F8 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA616952CDCF40A004EE9F8 /* Date+Ext.swift */; };
 		4DA616982CDCF44D004EE9F8 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA616972CDCF44D004EE9F8 /* String+Ext.swift */; };
@@ -62,6 +64,8 @@
 		4D58EEDC2CDB815F00281949 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D58EEE22CDB8C5E00281949 /* TodoReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoReactor.swift; sourceTree = "<group>"; };
 		4D58EEF22CDB8F7900281949 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		4D7D49312CEB3A1600925244 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		4D7D49332CEB5EB000925244 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		4DA616932CDCE597004EE9F8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4DA616952CDCF40A004EE9F8 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		4DA616972CDCF44D004EE9F8 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
@@ -132,6 +136,8 @@
 				4D58EEE22CDB8C5E00281949 /* TodoReactor.swift */,
 				4D4201692CE4E9C2001D07A8 /* DetailTodoReactor.swift */,
 				4DAC10252CDCD9050096AAB5 /* TodoCell.swift */,
+				4D7D49312CEB3A1600925244 /* LoadingView.swift */,
+				4D7D49332CEB5EB000925244 /* UIViewController+Ext.swift */,
 				4D58EED42CDB815B00281949 /* Main.storyboard */,
 				4D58EED72CDB815F00281949 /* Assets.xcassets */,
 				4D58EED92CDB815F00281949 /* LaunchScreen.storyboard */,
@@ -252,9 +258,11 @@
 			files = (
 				4DA616982CDCF44D004EE9F8 /* String+Ext.swift in Sources */,
 				4D58EED32CDB815B00281949 /* ViewController.swift in Sources */,
+				4D7D49342CEB5EB000925244 /* UIViewController+Ext.swift in Sources */,
 				4D58EEF32CDB8F7900281949 /* Data.swift in Sources */,
 				4D58EECF2CDB815B00281949 /* AppDelegate.swift in Sources */,
 				4DA616962CDCF40A004EE9F8 /* Date+Ext.swift in Sources */,
+				4D7D49322CEB3A1600925244 /* LoadingView.swift in Sources */,
 				4DA6169B2CE1FE7E004EE9F8 /* DetailTodoViewController.swift in Sources */,
 				4DAC10262CDCD9050096AAB5 /* TodoCell.swift in Sources */,
 				4DAC102D2CDCDD480096AAB5 /* UIView+Ext.swift in Sources */,
