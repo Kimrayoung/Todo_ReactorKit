@@ -85,7 +85,6 @@ extension TodoReactor {
         var newState: State = state
         switch mutation {
         case .fetchTodos(let todos):
-            print(#fileID, #function, #line, "- todos 가져옴⭐️")
             newState.todos = todos
             
         case let .todoSelected(idx):

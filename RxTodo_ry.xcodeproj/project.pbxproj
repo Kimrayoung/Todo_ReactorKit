@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4D42016A2CE4E9C2001D07A8 /* DetailTodoReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4201692CE4E9C2001D07A8 /* DetailTodoReactor.swift */; };
+		4D42016C2CE63830001D07A8 /* TodoCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D42016B2CE63830001D07A8 /* TodoCellReactor.swift */; };
 		4D58EECF2CDB815B00281949 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D58EECE2CDB815B00281949 /* AppDelegate.swift */; };
 		4D58EED12CDB815B00281949 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D58EED02CDB815B00281949 /* SceneDelegate.swift */; };
 		4D58EED32CDB815B00281949 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D58EED22CDB815B00281949 /* ViewController.swift */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		4D4201692CE4E9C2001D07A8 /* DetailTodoReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTodoReactor.swift; sourceTree = "<group>"; };
+		4D42016B2CE63830001D07A8 /* TodoCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCellReactor.swift; sourceTree = "<group>"; };
 		4D58EECB2CDB815B00281949 /* RxTodo_ry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxTodo_ry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D58EECE2CDB815B00281949 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D58EED02CDB815B00281949 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				4DA6169A2CE1FE7E004EE9F8 /* DetailTodoViewController.swift */,
 				4D58EED02CDB815B00281949 /* SceneDelegate.swift */,
 				4D58EED22CDB815B00281949 /* ViewController.swift */,
+				4D42016B2CE63830001D07A8 /* TodoCellReactor.swift */,
 				4D58EEE22CDB8C5E00281949 /* TodoReactor.swift */,
 				4D4201692CE4E9C2001D07A8 /* DetailTodoReactor.swift */,
 				4DAC10252CDCD9050096AAB5 /* TodoCell.swift */,
@@ -259,6 +262,7 @@
 				4D58EED12CDB815B00281949 /* SceneDelegate.swift in Sources */,
 				4DA6169F2CE205EE004EE9F8 /* Storyboard+Ext.swift in Sources */,
 				4D42016A2CE4E9C2001D07A8 /* DetailTodoReactor.swift in Sources */,
+				4D42016C2CE63830001D07A8 /* TodoCellReactor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
